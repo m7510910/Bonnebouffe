@@ -31,3 +31,55 @@
 {
 	word-wrap: break-word;
 }
+
+.pagination {
+  display: inline-block;
+  margin-left: 50px;
+}
+
+.pagination a {
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.detail td, .recipe th {
+  border: 1px solid black;
+  padding: 8px;
+}
+.detail tr:nth-child(even){background-color: lightblue;}
+
+.detail tr:hover {background-color: #ddd;}
+
+.detail th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #005294;
+  color: white;
+}
+
+.detail
+{
+	padding-top: 50px;
+	margin: auto;
+	width: 60%;
+	text-align: center;
+}
+
+.recipeimg
+{
+	width: 100px;
+}
+
+.recipeimg td
+{
+	word-wrap: break-word;
+}
+
+.searchbar
+{
+  margin-left: 50px;
+}

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Acceuil</title>
+	<title>Bonne Bouffe</title>
 	<link rel="stylesheet" type="text/css" href="./styles/stylebase.css">
 	<link rel="stylesheet" type="text/css" href="./styles/stylerecette.css">
 </head>
 	<?php
+		session_start();
 		$con = mysqli_connect('localhost','root','Mario748!','bonnebouffe') or die("Connection error!");
 	?>
 <body>
@@ -41,6 +42,10 @@
 
 				case 'recipe':
 					include('./pages/base/recettebase.php');
+					break;
+
+				case 'recipedetail':
+					include('./pages/base/recettedetail.php');				
 					break;
 
 				case 'contact':
