@@ -1,0 +1,33 @@
+.recipe td, .recipe th {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.recipe tr:nth-child(even){background-color: lightblue;}
+
+.recipe tr:hover {background-color: #ddd;}
+
+.recipe th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #005294;
+  color: white;
+}
+
+.recipe
+{
+	margin: auto;
+	width: 95%;
+	text-align: center;
+}
+
+.recipeimg
+{
+	width: 100px;
+}
+
+.recipeimg td
+{
+	word-wrap: break-word;
+}
