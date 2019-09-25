@@ -20,6 +20,13 @@
 	margin: auto;
 	width: 95%;
 	text-align: center;
+  table-layout: fixed;
+}
+
+td input {
+  min-width: 10px;
+  max-width: 80%;
+  width: 100%;
 }
 
 .recipeimg

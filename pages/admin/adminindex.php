@@ -28,6 +28,9 @@
 	</div>
 
 	<?php
+
+		$i = 0;
+
 		if(isset($_GET["links"]))
 		{
 			$link = $_GET["links"];
@@ -48,11 +51,11 @@
 					break;
 
 				case 'recipedetail':
-					include('./pages/base/recettedetail.php');				
+					include('../base/recettedetail.php');				
 					break;
 
 				case 'member':
-					include('./pages/base/contact.php');
+					include('./adminmember.php');
 					break;
 			}
 		}

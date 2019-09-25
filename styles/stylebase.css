@@ -105,3 +105,47 @@
 	border-style: solid;
 	border-color: black;
 }
+
+.deletebtn
+{
+	background-color: red;
+	color: white;
+	border-radius: 8px;
+	height: 40px;
+	width: 100px;
+	float: right;
+	margin-right: 50px;
+}
+
+.modifybtn
+{
+	background-color: blue;
+	color: white;
+	border-radius: 8px;
+	height: 40px;
+	width: 100px;
+	float: right;
+	margin-right: 50px;
+}
+
+.modifybtn:hover, .deletebtn:hover
+{
+	cursor: pointer;
+}
+
+.updatetext
+{
+	float: right;
+	margin-right: 20px;
+	margin-top: 10px;
+}
+
+.success
+{
+	color: green;
+}
+
+.failure
+{
+	color: red;
+}
