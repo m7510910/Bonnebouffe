@@ -56,14 +56,14 @@
 							echo "<tr>
 							<td><input type='checkbox' name='recipelist[]' value='$id'></td>
 							<td>$id <input type='hidden' name='idlist[]' value='$id'></td>
-							<td><input type='text' name='namelist[]' value='$name'></td>
-							<td><input type='text' name='ingredientlist[]' value='$ingredient'></td>
-							<td><input type='text' name='preparationlist[]' value='$preparation'></td>
-							<td><input type='text' name='nbpersonlist[]' value='$nbperson'></td>
-							<td><input type='text' name='costlist[]' value='$cost $'></td>
+							<td><input class='tdinput' type='text' name='namelist[]' value='$name'></td>
+							<td><input class='tdinput' type='text' name='ingredientlist[]' value='$ingredient'></td>
+							<td><input class='tdinput' type='text' name='preparationlist[]' value='$preparation'></td>
+							<td><input class='tdinput' type='text' name='nbpersonlist[]' value='$nbperson'></td>
+							<td><input class='tdinput' type='text' name='costlist[]' value='$cost $'></td>
 							<td><img class='recipeimg' src='./images/$photo'></td>
-							<td><input type='text' name='datelist[]' value='$date'></td>
-							<td><input type='text' name='authorlist[]' value='$author'></td>
+							<td><input class='tdinput' type='text' name='datelist[]' value='$date'></td>
+							<td><input class='tdinput' type='text' name='authorlist[]' value='$author'></td>
 							<td><a href='adminindex.php?links=recipedetail&id=$id'><input type='button' name='detail' value='detail'></a></td>
 							</tr>";
 						}			
@@ -95,14 +95,14 @@
 							echo "<tr>
 							<td><input type='checkbox' name='recipelist[]' value='$id'></td>
 							<td>$id <input type='hidden' name='idlist[]' value='$id'></td>
-							<td><input type='text' name='namelist[]' value='$name'></td>
-							<td><input type='text' name='ingredientlist[]' value='$ingredient'></td>
-							<td><input type='text' name='preparationlist[]' value='$preparation'></td>
-							<td><input type='text' name='nbpersonlist[]' value='$nbperson'></td>
-							<td><input type='text' name='costlist[]' value='$cost $'></td>
+							<td><input class='tdinput' type='text' name='namelist[]' value='$name'></td>
+							<td><input class='tdinput' type='text' name='ingredientlist[]' value='$ingredient'></td>
+							<td><input class='tdinput' type='text' name='preparationlist[]' value='$preparation'></td>
+							<td><input class='tdinput' type='text' name='nbpersonlist[]' value='$nbperson'></td>
+							<td><input class='tdinput' type='text' name='costlist[]' value='$cost $'></td>
 							<td><img class='recipeimg' src='./images/$photo'></td>
-							<td><input type='text' name='datelist[]' value='$date'></td>
-							<td><input type='text' name='authorlist[]' value='$author'></td>
+							<td><input class='tdinput' type='text' name='datelist[]' value='$date'></td>
+							<td><input class='tdinput' type='text' name='authorlist[]' value='$author'></td>
 							<td><a href='adminindex.php?links=recipedetail&id=$id'><input type='button' name='detail' value='detail'></a></td>
 							</tr>";
 						}					

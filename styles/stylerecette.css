@@ -23,7 +23,7 @@
   table-layout: fixed;
 }
 
-td input {
+td .tdinput{
   min-width: 10px;
   max-width: 80%;
   width: 100%;

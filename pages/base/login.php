@@ -23,7 +23,7 @@
 					<td><input type="password" name="passwordmember"></td>
 				</tr>
 				<tr>
-					<td><a href="index.php?links=userlogin"><input type="submit" name="userlogin" value="Entrez"></input></a></td>
+					<td><a href="index.php?links=userlogin"><input class="loginbtn" type="submit" name="userlogin" value="Entrez"></input></a></td>
 					<td><a href="index.php?links=newuser">Non Membre?</a></td>
 				</tr>
 			</table>
@@ -39,7 +39,7 @@
 					<td><input type="password" name="passwordadmin"></td>
 				</tr>
 				<tr>
-					<td><a href="index.php?links=adminlogin"><input type="submit" name="adminlogin" value="Entrez"></input></a></td>
+					<td><a href="index.php?links=adminlogin"><input class="loginbtn" type="submit" name="adminlogin" value="Entrez"></input></a></td>
 				</tr>
 			</table>
 		</form>
