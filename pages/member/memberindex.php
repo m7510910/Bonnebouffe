@@ -21,11 +21,11 @@
 	</div>
 
 	<div class="btngroup">
-		<a href="adminindex.php?links=index"><button>Acceuil</button></a>
-		<a href="adminindex.php?links=logout"><button>Deconnection</button></a>
-		<a href="adminindex.php?links=recipe"><button>Recettes</button></a>
-		<a href="adminindex.php?links=member"><button>Membres</button></a>
-		<a href="adminindex.php?links=myrecipe"><button>Recettes</button></a>
+		<a href="memberindex.php?links=index"><button>Acceuil</button></a>
+		<a href="memberindex.php?links=logout"><button>Deconnection</button></a>
+		<a href="memberindex.php?links=recipe"><button>Recettes</button></a>
+		<a href="memberindex.php?links=member"><button>Membres</button></a>
+		<a href="memberindex.php?links=myrecipe"><button>Mes recettes</button></a>
 	</div>
 
 	<?php
@@ -48,7 +48,7 @@
 					break;
 
 				case 'recipe':
-					include('./adminrecette.php');
+					include('./memberrecipe.php');
 					break;
 
 				case 'recipedetail':
@@ -56,11 +56,11 @@
 					break;
 
 				case 'member':
-					include('./adminmember.php');
+					include('./membermember.php');
 					break;
 
 				case 'myrecipe':
-					include('./adminmyrecipe.php');
+					include('./membermyrecipe.php');
 					break;
 			}
 		}

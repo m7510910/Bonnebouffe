@@ -57,10 +57,6 @@
 				case 'member':
 					include('./adminmember.php');
 					break;
-
-				case 'myrecipe':
-					include('./adminmyrecipe.php');
-					break;
 			}
 		}
 		else
