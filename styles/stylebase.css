@@ -149,3 +149,20 @@
 {
 	color: red;
 }
+
+.createmember
+{
+	padding-left: 60px;
+}
+
+.createmember td
+{
+	padding-right: 20px;
+}
+
+.areainput
+{
+	width: 210px;
+	height: 30px;
+	border-radius: 5px;
+}

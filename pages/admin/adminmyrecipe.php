@@ -126,6 +126,7 @@
 
 	?>
 
+
 	<p class="hometext">Liste de Recettes</p>
 
 	<form method="post">
@@ -150,7 +151,7 @@
 				</tr>
 
 				<?php
-					$sql1 = "SELECT * FROM recettes WHERE idrecette LIKE '%$searchedrecipe%' OR nom LIKE '%$searchedrecipe%' OR ingredients LIKE '%$searchedrecipe%';";
+					$sql1 = "SELECT * FROM recettes WHERE nom LIKE '%$searchedrecipe%' OR ingredients LIKE '%$searchedrecipe%';";
 					$search = mysqli_query($con, $sql);
 					$nbre = mysqli_num_rows($search);
 
@@ -182,7 +183,7 @@
 							<td><input class='tdinput' type='text' name='preparationlist[]' value='$preparation'></td>
 							<td><input class='tdinput' type='text' name='nbpersonlist[]' value='$nbperson'></td>
 							<td><input class='tdinput' type='text' name='costlist[]' value='$cost $'></td>
-							<td><img class='recipeimg' src='../../images/$photo'></td>
+							<td><img class='recipeimg' src='./images/$photo'></td>
 							<td><input class='tdinput' type='text' name='datelist[]' value='$date'></td>
 							<td><input class='tdinput' type='text' name='authorlist[]' value='$author'></td>
 							<td><a href='adminindex.php?links=recipedetail&id=$id'><input type='button' name='detail' value='detail'></a></td>
@@ -197,7 +198,7 @@
 					if (isset($_POST['searchbtn'])) 
 					{		
 						$searchedrecipe = $_POST['recipesearch'];
-						$sql = "SELECT * FROM recettes WHERE idrecette LIKE '%$searchedrecipe%' OR nom LIKE '%$searchedrecipe%' OR ingredients LIKE '%$searchedrecipe%';";
+						$sql = "SELECT * FROM recettes WHERE nom LIKE '%$searchedrecipe%' OR ingredients LIKE '%$searchedrecipe%';";
 						$search = mysqli_query($con,$sql);
 						$nbre = mysqli_num_rows($search);
 

@@ -55,7 +55,13 @@
 			$findmember = mysqli_query($con, $sql);
 			$foundmember = mysqli_num_rows($findmember);
 
-			echo "$foundmember";
+			if($foundmember == 1)
+			{
+				$getmember = mysqli_fetch_row($findmember);
+				$_SESSION['member'] = $getmember[0];
+
+				header('location: ./pages/member/memberindex.php');
+			}
 		}
 		if (isset($_POST['adminlogin'])) 
 		{
@@ -70,8 +76,6 @@
 			{
 				$getadmin = mysqli_fetch_row($findadmin);
 				$_SESSION['admin'] = $getadmin[0];
-
-				echo $_SESSION['admin'];
 
 				header('location: ./pages/admin/adminindex.php');
 			}

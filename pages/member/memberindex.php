@@ -7,7 +7,7 @@
 </head>
 	<?php
 		session_start();
-		if($_SESSION['admin'] == "") 
+		if($_SESSION['member'] == "") 
 		{
 			header('location: ../../index.php');
 		}
@@ -25,6 +25,7 @@
 		<a href="adminindex.php?links=logout"><button>Deconnection</button></a>
 		<a href="adminindex.php?links=recipe"><button>Recettes</button></a>
 		<a href="adminindex.php?links=member"><button>Membres</button></a>
+		<a href="adminindex.php?links=myrecipe"><button>Recettes</button></a>
 	</div>
 
 	<?php
