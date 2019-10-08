@@ -58,7 +58,7 @@
 							<td>$ingredient</td>
 							<td>$preparation</td>
 							<td>$nbperson</td>
-							<td>$cost $</td>
+							<td>$cost</td>
 							<td><img class='recipeimg' src='./images/$photo'></td>
 							<td>$date</td>
 							<td>$author</td>
@@ -96,7 +96,7 @@
 							<td>$ingredient</td>
 							<td>$preparation</td>
 							<td>$nbperson</td>
-							<td>$cost $</td>
+							<td>$cost</td>
 							<td><img class='recipeimg' src='./images/$photo'></td>
 							<td>$date</td>
 							<td>$author</td>

@@ -7,7 +7,7 @@
 
 	<p class="hometext">Ajout de Recettes</p>
 
-	<form method="post" enctype="multipart/form-data">
+	<form method="post" enctype="multipart/form-data" action="adminrecette.php">
 		<table class="createmember">
 			<tr>
 				<td>Nom:</td>
@@ -34,96 +34,40 @@
 	</form>
 
 	<?php
+		if(isset($_POST['createbtn']))
+		{			
+			if(!empty($_FILES['fileToUpload']) && (!isempty($_POST['firstname'])) && (!isempty($_POST['ingredient'])) && (!isempty($_POST['preparation'])) && (!isempty($_POST['nb'])) && (!isempty($_POST['cost'])))
+			{
+				$path = "../../images/";
+				$path = $path . basename( $_FILES['fileToUpload']['name']);
 
-		/*$startdir = getcwd();
-		$uploaddir = '/Bonnebouffe/images/';
+				$name = $_POST['firstname'];
+				$ing = $_POST['ingredient'];
+				$prep = $_POST['preparation'];
+				$nb = $_POST['nb'];
+				$cost = $_POST['cost'];
+				$photo = $_FILES['fileToUpload']['name'];
 
-		$fileExtensions = ['jpeg','jpg','png']; // Get all the file extensions
+				$sql = "INSERT INTO recettes(`idrecette`, `nom`, `ingredients`, `preparation`, `nombrepersonne`, `cout`, `dateinscrite`, `photo`, `idmembre`) VALUES(NULL,'$name','$ing','$prep','$nb','$cost','$photo');";
 
-	    if(isset($_POST['createbtn']))
-	    {
-	    	$fileName = $_FILES['photo']['name'];
-	    	$fileSize = $_FILES['photo']['size'];
-	    	$fileTmpName  = $_FILES['photo']['tmp_name'];
-	    	$fileType = $_FILES['photo']['type'];
-	    	$fileExtension = strtolower(end(explode('.',$fileName)));
+				$newrecipe = mysqli_query($con, $sql);
 
-	    	$uploadPath = $startdir . '/'. basename($fileName); 
-
-	    	echo "$uploadPath";
-
-	    	if (! in_array($fileExtension,$fileExtensions)) 
-	    	{
-	            echo "Extension non autorisser";
-	        }
-	    	elseif($fileSize > 2000000)
-	    	{
-	    		echo "Taille de fichier trop grand, 2MB max";
-	    	}
-	    	else
-	    	{
-	    		$didUpload = move_uploaded_file($fileTmpName, $uploadPath);
-
-	    		if ($didUpload) 
-	    		{
-	                echo "Le fichier " . basename($fileName) . " has been uploaded";
-	            } 
-	            else 
-	            {
-	                echo "Une erreur est survenue veuillez ressayez plustard ou contactez un admin";
-	            }
-	    	}
-
-
-	    }*/
-	    if(isset($_POST['createbtn']))
-	    {
-
-
-		    $target_dir = getcwd();
-		    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-		    $uploadOk = 1;
-		    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-		    // Check if image file is a actual image or fake image
-		    if(isset($_POST["submit"])) {
-		        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-		        if($check !== false) {
-		            echo "File is an image - " . $check["mime"] . ".";
-		            $uploadOk = 1;
-		        } else {
-		            echo "File is not an image.";
-		            $uploadOk = 0;
-		        }
-		    }
-		    // Check if file already exists
-		    if (file_exists($target_file)) {
-		        echo "Sorry, file already exists.";
-		        $uploadOk = 0;
-		    }
-		    // Check file size
-		    if ($_FILES["fileToUpload"]["size"] > 500000) {
-		        echo "Sorry, your file is too large.";
-		        $uploadOk = 0;
-		    }
-		    // Allow certain file formats
-		    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-		    && $imageFileType != "gif" ) {
-		        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-		        $uploadOk = 0;
-		    }
-		    // Check if $uploadOk is set to 0 by an error
-		    if ($uploadOk == 0) {
-		        echo "Sorry, your file was not uploaded.";
-		    // if everything is ok, try to upload file
-		    } else {
-		        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-		            echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-		        } else {
-		            echo "Sorry, there was an error uploading your file.";
-		        }
-		    }
+				if($newrecipe)
+				{				
+					if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $path)) 
+					{
+						//echo "The file ".  basename( $_FILES['fileToUpload']['name']). 
+						//" has been uploaded";
+						echo "<span class='updatetext success'>Ajout reussi!</span>";
+					} 
+					else
+					{
+						//echo "There was an error uploading the file, please try again!";
+						//echo $_FILES['fileToUpload']['error'];
+						echo "<span class='updatetext failure'>1 ou plusieur champ ne sont pas comforme!</span>";
+					}
+			}
 		}
-
 	?>
 
 	<p class="hometext">Liste de Recettes</p>
@@ -181,7 +125,7 @@
 							<td><input class='tdinput' type='text' name='ingredientlist[]' value='$ingredient'></td>
 							<td><input class='tdinput' type='text' name='preparationlist[]' value='$preparation'></td>
 							<td><input class='tdinput' type='text' name='nbpersonlist[]' value='$nbperson'></td>
-							<td><input class='tdinput' type='text' name='costlist[]' value='$cost $'></td>
+							<td><input class='tdinput' type='text' name='costlist[]' value='$cost'></td>
 							<td><img class='recipeimg' src='../../images/$photo'></td>
 							<td><input class='tdinput' type='text' name='datelist[]' value='$date'></td>
 							<td><input class='tdinput' type='text' name='authorlist[]' value='$author'></td>
@@ -220,7 +164,7 @@
 							<td><input class='tdinput' type='text' name='ingredientlist[]' value='$ingredient'></td>
 							<td><input class='tdinput' type='text' name='preparationlist[]' value='$preparation'></td>
 							<td><input class='tdinput' type='text' name='nbpersonlist[]' value='$nbperson'></td>
-							<td><input class='tdinput' type='text' name='costlist[]' value='$cost $'></td>
+							<td><input class='tdinput' type='text' name='costlist[]' value='$cost'></td>
 							<td><img class='recipeimg' src='./images/$photo'></td>
 							<td><input class='tdinput' type='text' name='datelist[]' value='$date'></td>
 							<td><input class='tdinput' type='text' name='authorlist[]' value='$author'></td>

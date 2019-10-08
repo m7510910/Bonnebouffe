@@ -5,6 +5,72 @@
 </head>
 <body>
 
+	<p class="hometext">Ajout de Recettes</p>
+
+	<form method="post" enctype="multipart/form-data" action="adminrecette.php">
+		<table class="createmember">
+			<tr>
+				<td>Nom:</td>
+				<td><input type="text" name="firstname"></td>
+			</tr>
+			<tr>
+				<td>ingredient:</td>
+				<td><textarea class='areainput' name="ingredient"></textarea></td>
+				<td>Preparation:</td>
+				<td><textarea class='areainput' name="preparation"></textarea></td>
+			</tr>
+			<tr>
+				<td>NB personne:</td>
+				<td><input type="text" name="nb"></td>
+				<td>cout:</td>
+				<td><input type="text" name="cost"></td>
+				<td>Photo:</td>
+				<td><input type="file" name="fileToUpload" accept="image/*"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="createbtn" value="Creer"></td>
+			</tr>
+		</table>
+	</form>
+
+	<?php
+		if(isset($_POST['createbtn']))
+		{			
+			if(!empty($_FILES['fileToUpload']) && (!isempty($_POST['firstname'])) && (!isempty($_POST['ingredient'])) && (!isempty($_POST['preparation'])) && (!isempty($_POST['nb'])) && (!isempty($_POST['cost'])))
+			{
+				$path = "../../images/";
+				$path = $path . basename( $_FILES['fileToUpload']['name']);
+
+				$name = $_POST['firstname'];
+				$ing = $_POST['ingredient'];
+				$prep = $_POST['preparation'];
+				$nb = $_POST['nb'];
+				$cost = $_POST['cost'];
+				$photo = $_FILES['fileToUpload']['name'];
+
+				$sql = "INSERT INTO recettes(`idrecette`, `nom`, `ingredients`, `preparation`, `nombrepersonne`, `cout`, `dateinscrite`, `photo`, `idmembre`) VALUES(NULL,'$name','$ing','$prep','$nb','$cost','$photo');";
+
+				$newrecipe = mysqli_query($con, $sql);
+
+				if($newrecipe)
+				{				
+					if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $path)) 
+					{
+						//echo "The file ".  basename( $_FILES['fileToUpload']['name']). 
+						//" has been uploaded";
+						echo "<span class='updatetext success'>Ajout reussi!</span>";
+					} 
+					else
+					{
+						//echo "There was an error uploading the file, please try again!";
+						//echo $_FILES['fileToUpload']['error'];
+						echo "<span class='updatetext failure'>1 ou plusieur champ ne sont pas comforme!</span>";
+					}
+				}
+			}
+		}
+	?>
+
 	<p class="hometext">Liste de Recettes</p>
 
 	<form method="post">
@@ -30,54 +96,60 @@
 
 				<?php
 					$memberid = $_SESSION['member'];
-					$sql = "SELECT * FROM membres WHERE login='$memberid';";
+					$sql = "SELECT idmembre FROM membres WHERE login='$memberid';";
 
 					$findmember = mysqli_query($con, $sql);
 					$getmember = mysqli_fetch_row($findmember);
 					$recipeowner = $getmember[0];
-					echo "$recipeowner";
-
-					$sql1 = "SELECT * FROM recettes WHERE idmembre='$recipeowner' AND (idrecette LIKE '%$searchedrecipe%' OR nom LIKE '%$searchedrecipe%' OR ingredients LIKE '%$searchedrecipe%');";
-					$search = mysqli_query($con, $sql);
-					$nbre = mysqli_num_rows($search);
-
+					$searchedrecipe = $_POST['recipesearch'];
+					
 					function showresult()
 					{
 						global $con, $offset, $recipeowner;
 
-						$sql = "SELECT * FROM recettes LIMIT $offset,10 WHERE idmembre='$recipeowner';";
+						$sql = "SELECT * FROM recettes WHERE idmembre='$recipeowner' LIMIT $offset,10;";
 
-						$recipequery = mysqli_query($con, $sql);
+						$recipes = mysqli_query($con, $sql);
 
-						while($recipefetch=mysqli_fetch_row($recipequery))
-						{
-							$id = $recipefetch[0];
-							$name = $recipefetch[1];
-							$ingredient = $recipefetch[2];
-							$preparation = $recipefetch[3];
-							$nbperson = $recipefetch[4];
-							$cost = $recipefetch[5];
-							$photo = $recipefetch[7];
-							$date = $recipefetch[6];
-							$author = $recipefetch[8];
-
-							echo "<tr>
-							<td><input type='checkbox' name='recipelist[]' value='$id'></td>
-							<td>$id <input type='hidden' name='idlist[]' value='$id'></td>
-							<td><input class='tdinput' type='text' name='namelist[]' value='$name'></td>
-							<td><input class='tdinput' type='text' name='ingredientlist[]' value='$ingredient'></td>
-							<td><input class='tdinput' type='text' name='preparationlist[]' value='$preparation'></td>
-							<td><input class='tdinput' type='text' name='nbpersonlist[]' value='$nbperson'></td>
-							<td><input class='tdinput' type='text' name='costlist[]' value='$cost $'></td>
-							<td><img class='recipeimg' src='../../images/$photo'></td>
-							<td><input class='tdinput' type='text' name='datelist[]' value='$date'></td>
-							<td><input class='tdinput' type='text' name='authorlist[]' value='$author'></td>
-							<td><a href='adminindex.php?links=recipedetail&id=$id'><input type='button' name='detail' value='detail'></a></td>
-							</tr>";
-						}			
+						showrecipes($recipes);			
 					}
 
-					$rowcount = mysqli_query($con, "SELECT COUNT(*) FROM recettes;");
+					function showrecipes($recipes)
+					{
+						while($recipe=mysqli_fetch_row($recipes))
+						{
+							showrecipe($recipe);
+						}
+					}
+
+					function showrecipe($recipe)
+					{
+						$id = $recipe[0];
+						$name = $recipe[1];
+						$ingredient = $recipe[2];
+						$preparation = $recipe[3];
+						$nbperson = $recipe[4];
+						$cost = $recipe[5];
+						$photo = $recipe[7];
+						$date = $recipe[6];
+						$author = $recipe[8];
+
+						echo "<tr>
+						<td><input type='checkbox' name='recipelist[]' value='$id'></td>
+						<td>$id <input type='hidden' name='idlist[]' value='$id'></td>
+						<td><input class='tdinput' type='text' name='namelist[]' value='$name'></td>
+						<td><input class='tdinput' type='text' name='ingredientlist[]' value='$ingredient'></td>
+						<td><input class='tdinput' type='text' name='preparationlist[]' value='$preparation'></td>
+						<td><input class='tdinput' type='text' name='nbpersonlist[]' value='$nbperson'></td>
+						<td><input class='tdinput' type='text' name='costlist[]' value='$cost'></td>
+						<td><img class='recipeimg' src='../../images/$photo'></td>
+						<td><input class='tdinput' type='text' name='datelist[]' value='$date'></td>
+						<td><input class='tdinput' type='text' name='authorlist[]' value='$author'></td>
+						<td><a href='memberindex.php?links=recipedetail&id=$id'><input type='button' name='detail' value='detail'></a></td>
+						</tr>";
+					}
+
+					$rowcount = mysqli_query($con, "SELECT COUNT(*) FROM recettes;");					
 					$nbrows = mysqli_fetch_row($rowcount);
 					$pagenumbers = ceil($nbrows[0] / 10);
 
@@ -88,32 +160,7 @@
 						$search = mysqli_query($con,$sql);
 						$nbre = mysqli_num_rows($search);
 
-						while ($recipefetch = mysqli_fetch_row($search)) 
-						{
-							$id = $recipefetch[0];
-							$name = $recipefetch[1];
-							$ingredient = $recipefetch[2];
-							$preparation = $recipefetch[3];
-							$nbperson = $recipefetch[4];
-							$cost = $recipefetch[5];
-							$photo = $recipefetch[7];
-							$date = $recipefetch[6];
-							$author = $recipefetch[8];
-
-							echo "<tr>
-							<td><input type='checkbox' name='recipelist[]' value='$id'></td>
-							<td>$id <input type='hidden' name='idlist[]' value='$id'></td>
-							<td><input class='tdinput' type='text' name='namelist[]' value='$name'></td>
-							<td><input class='tdinput' type='text' name='ingredientlist[]' value='$ingredient'></td>
-							<td><input class='tdinput' type='text' name='preparationlist[]' value='$preparation'></td>
-							<td><input class='tdinput' type='text' name='nbpersonlist[]' value='$nbperson'></td>
-							<td><input class='tdinput' type='text' name='costlist[]' value='$cost $'></td>
-							<td><img class='recipeimg' src='./images/$photo'></td>
-							<td><input class='tdinput' type='text' name='datelist[]' value='$date'></td>
-							<td><input class='tdinput' type='text' name='authorlist[]' value='$author'></td>
-							<td><a href='adminindex.php?links=recipedetail&id=$id'><input type='button' name='detail' value='detail'></a></td>
-							</tr>";
-						}					
+						showrecipes($search);				
 					}
 					elseif (isset($_GET['pagenb'])) 
 					{
@@ -130,7 +177,7 @@
 
 					for ($i=1; $i <= $pagenumbers; $i++) 
 					{ 
-						echo "<a href='adminindex.php?links=recipe&pagenb=$i'>$i</a>";
+						echo "<a href='memberindex.php?links=recipe&pagenb=$i'>$i</a>";
 					}
 
 					echo "</div>";						
