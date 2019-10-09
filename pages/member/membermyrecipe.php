@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Recettes</title>
-</head>
-<body>
+<p class="hometext">Ajout de Recettes</p>
 
-	<p class="hometext">Ajout de Recettes</p>
-
-	<form method="post" enctype="multipart/form-data" action="adminrecette.php">
+	<form method="post" enctype="multipart/form-data">
 		<table class="createmember">
 			<tr>
 				<td>Nom:</td>
@@ -34,9 +27,11 @@
 	</form>
 
 	<?php
+		$recipeowner = $_SESSION['member'];
+
 		if(isset($_POST['createbtn']))
-		{			
-			if(!empty($_FILES['fileToUpload']) && (!isempty($_POST['firstname'])) && (!isempty($_POST['ingredient'])) && (!isempty($_POST['preparation'])) && (!isempty($_POST['nb'])) && (!isempty($_POST['cost'])))
+		{				
+			if(!empty($_FILES['fileToUpload']) && (!empty($_POST['firstname'])) && (!empty($_POST['ingredient'])) && (!empty($_POST['preparation'])) && (!empty($_POST['nb'])) && (!empty($_POST['cost'])))
 			{
 				$path = "../../images/";
 				$path = $path . basename( $_FILES['fileToUpload']['name']);
@@ -48,7 +43,7 @@
 				$cost = $_POST['cost'];
 				$photo = $_FILES['fileToUpload']['name'];
 
-				$sql = "INSERT INTO recettes(`idrecette`, `nom`, `ingredients`, `preparation`, `nombrepersonne`, `cout`, `dateinscrite`, `photo`, `idmembre`) VALUES(NULL,'$name','$ing','$prep','$nb','$cost','$photo');";
+				$sql = "INSERT INTO recettes(`nom`, `ingredients`, `preparation`, `nombrepersonne`, `cout`, `dateinscrite`, `photo`, `idmembre`) VALUES('$name','$ing','$prep',$nb,$cost,now(),'$photo','$recipeowner');";
 
 				$newrecipe = mysqli_query($con, $sql);
 
@@ -58,13 +53,13 @@
 					{
 						//echo "The file ".  basename( $_FILES['fileToUpload']['name']). 
 						//" has been uploaded";
-						echo "<span class='updatetext success'>Ajout reussi!</span>";
+						echo "<span class='uploadtext success'>Ajout reussi!</span>";
 					} 
 					else
 					{
 						//echo "There was an error uploading the file, please try again!";
 						//echo $_FILES['fileToUpload']['error'];
-						echo "<span class='updatetext failure'>1 ou plusieur champ ne sont pas comforme!</span>";
+						echo "<span class='uploadtext failure'>1 ou plusieur champ ne sont pas comforme!</span>";
 					}
 				}
 			}
@@ -95,12 +90,7 @@
 				</tr>
 
 				<?php
-					$memberid = $_SESSION['member'];
-					$sql = "SELECT idmembre FROM membres WHERE login='$memberid';";
-
-					$findmember = mysqli_query($con, $sql);
-					$getmember = mysqli_fetch_row($findmember);
-					$recipeowner = $getmember[0];
+					$recipeowner = $_SESSION['member'];
 					$searchedrecipe = $_POST['recipesearch'];
 					
 					function showresult()
@@ -177,7 +167,7 @@
 
 					for ($i=1; $i <= $pagenumbers; $i++) 
 					{ 
-						echo "<a href='memberindex.php?links=recipe&pagenb=$i'>$i</a>";
+						echo "<a href='memberindex.php?links=myrecipe&pagenb=$i'>$i</a>";
 					}
 
 					echo "</div>";						
@@ -241,5 +231,3 @@
 
 			}
 		?>
-</body>
-</html>

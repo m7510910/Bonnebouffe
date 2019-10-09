@@ -1,3 +1,17 @@
+<?php
+		if(!isset($_SESSION))
+		{
+			session_start();
+		}
+
+		$con = mysqli_connect('localhost','mopscom_marc','Mario748','mopscom_bonnebouffe') or die("Connection error!");
+		if(!$con)
+		{
+			$con = mysqli_connect('localhost','root','Mario748!','bonnebouffe');
+		}
+	?>
+
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,10 +19,6 @@
 	<link rel="stylesheet" type="text/css" href="./styles/stylebase.css">
 	<link rel="stylesheet" type="text/css" href="./styles/stylerecette.css">
 </head>
-	<?php
-		session_start();
-		$con = mysqli_connect('localhost','root','Mario748!','bonnebouffe') or die("Connection error!");
-	?>
 <body>
 
 	<div class="top">
@@ -36,7 +46,6 @@
 					break;
 
 				case 'login':
-					session_destroy();
 					include('./pages/base/login.php');
 					break;
 

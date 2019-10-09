@@ -9,7 +9,7 @@
 
 	<?php
 		$memberid = $_SESSION['member'];
-		$sql = "SELECT * FROM membres WHERE login='$memberid';";
+		$sql = "SELECT * FROM membres WHERE idmembre='$memberid';";
 
 		$findmember = mysqli_query($con, $sql);
 		$getmember = mysqli_fetch_row($findmember);
@@ -58,7 +58,7 @@
 
 				$sql = "UPDATE membres
 						SET idmembre='$id', prenom='$firstname', nom='$lastname', telephone='$phone', adresse='$address', datedenaissance='$birth', login='$login', password='$password'
-						WHERE login='$memberid';";
+						WHERE idmembre='$memberid';";
 						
 				$createmember = mysqli_query($con, $sql);
 			}

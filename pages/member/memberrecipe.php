@@ -59,7 +59,7 @@
 							<td>$preparation</td>
 							<td>$nbperson</td>
 							<td>$cost</td>
-							<td><img class='recipeimg' src='./images/$photo'></td>
+							<td><img class='recipeimg' src='../../images/$photo'></td>
 							<td>$date</td>
 							<td>$author</td>
 							<td><a href='memberindex.php?links=recipedetail&id=$id'><input type='button' name='detail' value='detail'></a></td>
@@ -97,7 +97,7 @@
 							<td>$preparation</td>
 							<td>$nbperson</td>
 							<td>$cost</td>
-							<td><img class='recipeimg' src='./images/$photo'></td>
+							<td><img class='recipeimg' src='../../images/$photo'></td>
 							<td>$date</td>
 							<td>$author</td>
 							<td><a href='memberindex.php?links=recipedetail&id=$id'><input type='button' name='detail' value='detail'></a></td>

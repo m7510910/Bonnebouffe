@@ -1,3 +1,16 @@
+<?php
+		session_start();
+		if($_SESSION['member'] == "") 
+		{
+			echo "<script>window.location.href='../../index.php'</script>";
+		}
+		
+		$con = mysqli_connect('localhost','mopscom_marc','Mario748','mopscom_bonnebouffe') or die("Connection error!");
+		if(!$con)
+		{
+			$con = mysqli_connect('localhost','root','Mario748!','bonnebouffe');
+		}
+	?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,14 +18,6 @@
 	<link rel="stylesheet" type="text/css" href="../../styles/stylebase.css">
 	<link rel="stylesheet" type="text/css" href="../../styles/stylerecette.css">
 </head>
-	<?php
-		session_start();
-		if($_SESSION['member'] == "") 
-		{
-			header('location: ../../index.php');
-		}
-		$con = mysqli_connect('localhost','root','Mario748!','bonnebouffe') or die("Connection error!");
-	?>
 <body>
 
 	<div class="top">
@@ -44,7 +49,7 @@
 
 				case 'logout':
 					session_destroy();
-					header('location: ../../index.php');
+					echo "<script>window.location.href='../../index.php'</script>";
 					break;
 
 				case 'recipe':
